@@ -12,14 +12,14 @@ var credentials = {
 // Initialize the OAuth2 Library
 var oauth2 = require('simple-oauth2')(credentials);
 
-// Authorization oauth2 URI
+// Build authorization oauth2 URI
 var authorization_uri = oauth2.authCode.authorizeURL({
   redirect_uri: 'http://localhost:8000/callback',
   scope: '/authenticate',
   state: 'nope'
 });
 
-// init express
+// Init express
 var app = express();
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -40,12 +40,12 @@ app.get('/callback', function(req, res) {
     redirect_uri: 'http://localhost:8000/callback'
   }, function(error, result){
     if (error) {
-      // Show error
+      // Error page
       res.render('pages/error', {
         'error': JSON.stringify(error, null, 4)
       });
     } else {
-      // Show token
+      // Token Page
       token = oauth2.accessToken.create(result);
       res.render('pages/token', {
         'token': JSON.stringify(token, null, 4)
