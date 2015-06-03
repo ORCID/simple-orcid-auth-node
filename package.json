@@ -1,0 +1,29 @@
+{
+  "name": "simple-orcid-auth-node",
+  "version": "0.0.1",
+  "description": "Simple example of using ORCID OAuth2 Authentication",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "simple-oauth2": "https://github.com/ORCID/simple-oauth2/archive/MASTER_2015_06_03.tar.gz",
+    "express": "^4.12.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rcpeters/simple-orcid-auth-node.git"
+  },
+  "engines": {
+    "node": ">= 0.10.0",
+    "npm": ">= 2.0.0"
+  },
+  "keywords": [
+    "orcid"
+  ],
+  "author": "rcpeters",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rcpeters/simple-orcid-auth-node/issues"
+  },
+  "homepage": "https://github.com/rcpeters/simple-orcid-auth-node/issues",
+  "main": "server.js"
+}
