@@ -1,4 +1,6 @@
-var express = require('express');
+var express = require('express'), 
+  url = require('url');
+
 var port = process.env.EXPRESSPORT != undefined ? process.env.EXPRESSPORT: '8000'
 
 // Set the client credentials and the OAuth2 server
@@ -40,10 +42,17 @@ app.get('/callback', function(req, res) {
     redirect_uri: 'http://localhost:8000/callback'
   }, function(error, result){
     if (error) {
-      // Error page
-      res.render('pages/error', {
-        'error': JSON.stringify(error, null, 4)
-      });
+      // check for access_denied param
+      if (req.query.error == 'access_denied')
+        // User denied access
+        res.render('pages/access_denied', {
+          'error': JSON.stringify(error, null, 4)
+        });      
+      else
+        // General Error page
+        res.render('pages/error', {
+          'error': JSON.stringify(error, null, 4)
+        });
     } else {
       // Token Page
       token = oauth2.accessToken.create(result);
