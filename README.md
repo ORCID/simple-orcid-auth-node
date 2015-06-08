@@ -21,7 +21,7 @@ or
 
 * **Windows**
  
-    Select `Search programs and files` type in `cmd` and select `cywin`.
+    Select `Search programs and files` type in `cmd` and select cmd.
     
 * **OSX**
  
@@ -43,4 +43,9 @@ or
 
        node server.js
 
-### Visit [http://localhost:8000/](http://localhost:8000/)
+### Open localhost [http://localhost:8000/](http://localhost:8000/)
+You should now have a local example running.
+
+### Finally you can also see this code running live in a production:
+
+[https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/](https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/callback?code=4EkDzQ&state=1)
