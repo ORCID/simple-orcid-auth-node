@@ -28,6 +28,12 @@ or
     Open terminal by clicking `Search Spotlight` typing in `Terminal` and selecting Terminal.
 
 
+### Cd into the directory you cloned or unzipped
+
+         cd Downdloads/simple-orcid-auth-node
+
+         cd simple-orcid-auth-node
+
 
 ### Install dependencies
 
