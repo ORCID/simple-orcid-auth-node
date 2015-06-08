@@ -18,7 +18,7 @@ var authorization_uri = oauth2.authCode.authorizeURL({ // Build Auth URI
 var app = express(); // Express is our server
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-  
+
 app.get('/', function(req, res) { // Index page 
   res.render('pages/index', {'authorization_uri': authorization_uri});
 });
@@ -27,8 +27,12 @@ app.get('/callback', function(req, res) { // redeem code
   oauth2.authCode.getToken({
     code: req.query.code,
     redirect_uri: config.REDIRECT_URI
-  }, function(error, result){
-    if (error)
+  }, function(error, result) {
+    if (error == null) // No errors means we have a token :-)
+      res.render('pages/token', {
+        'token': JSON.stringify(oauth2.accessToken.create(result), null, 2)
+      })
+    else // Show token Page
       if (req.query.error == 'access_denied') // User denied access
         res.render('pages/access_denied', {
           'error': JSON.stringify(error, null, 2)
@@ -37,10 +41,6 @@ app.get('/callback', function(req, res) { // redeem code
         res.render('pages/error', {
           'error': JSON.stringify(error, null, 2)
         });
-    else // Show token Page
-      res.render('pages/token', {
-        'token': JSON.stringify(oauth2.accessToken.create(result), null, 2)
-      })
   });
 });
 
