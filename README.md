@@ -32,8 +32,11 @@ or
 
          cd Downdloads/simple-orcid-auth-node
 
+ or
+
          cd simple-orcid-auth-node
 
+depending on how you downloaded and unzipped the project.
 
 ### Install dependencies
 
