@@ -1,18 +1,22 @@
 var express = require('express'), 
   url = require('url');
 
-var port = process.env.EXPRESSPORT != undefined ? process.env.EXPRESSPORT: '8000'
-
-// Set the client credentials and the OAuth2 server
-var credentials = {
+var config = {
+  port: process.env.EXPRESSPORT != undefined ? process.env.EXPRESSPORT: '8000',
   clientID: 'APP-O9TUKAPVLALU1SOJ',
   clientSecret: '0eafb938-020e-45a6-a148-3c222171d9d8',
-  site: 'https://sandbox.orcid.org',
-  tokenPath:'https://api.sandbox.orcid.org/oauth/token'
-};
+  authSite: 'https://sandbox.orcid.org',
+  tokenPath: 'https://api.sandbox.orcid.org/oauth/token',
+  redirectUri: 'http://localhost:8000/callback'
+}
 
 // Initialize the OAuth2 Library
-var oauth2 = require('simple-oauth2')(credentials);
+var oauth2 = require('simple-oauth2')({
+  clientID: config.clientID,
+  clientSecret: config.clientSecret,
+  site: config.authSite,
+  tokenPath: config.tokenPath
+});
 
 // Build authorization oauth2 URI
 var authorization_uri = oauth2.authCode.authorizeURL({
@@ -63,6 +67,6 @@ app.get('/callback', function(req, res) {
   });
 });
 
-app.listen(port, function () {
-  console.log('server started on ' + port);
+app.listen(config.port, function () {
+  console.log('server started on ' + config.port);
 });
