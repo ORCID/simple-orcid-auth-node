@@ -44,6 +44,6 @@ app.get('/callback', function(req, res) { // redeem code
   });
 });
 
-app.listen(config.PORT, function () { // Start express
+app.listen(config.PORT, config.SERVER_IP, function () { // Start express
   console.log('server started on ' + config.PORT);
 });
