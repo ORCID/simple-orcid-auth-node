@@ -17,7 +17,7 @@
     "npm": ">= 2.0.0"
   },
   "keywords": [
-    "orcid"
+    "orcid node"
   ],
   "author": "rcpeters",
   "license": "MIT",
