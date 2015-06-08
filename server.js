@@ -1,27 +1,19 @@
 var express = require('express'), 
-  url = require('url');
-
-var config = {
-  port: process.env.EXPRESSPORT != undefined ? process.env.EXPRESSPORT: '8000',
-  clientID: 'APP-O9TUKAPVLALU1SOJ',
-  clientSecret: '0eafb938-020e-45a6-a148-3c222171d9d8',
-  authSite: 'https://sandbox.orcid.org',
-  tokenPath: 'https://api.sandbox.orcid.org/oauth/token',
-  redirectUri: 'http://localhost:8000/callback'
-}
+  config = require('./config.js');
 
 // Initialize the OAuth2 Library
 var oauth2 = require('simple-oauth2')({
-  clientID: config.clientID,
-  clientSecret: config.clientSecret,
-  site: config.authSite,
-  tokenPath: config.tokenPath
+  clientID: config.CLIENT_ID,
+  clientSecret: config.CLIENT_SECRET,
+  site: config.AUTH_SITE,
+  tokenPath: config.TOKEN_PATH
 });
 
-// Build authorization oauth2 URI
+// Build authorization Oauth2 URI
 var authorization_uri = oauth2.authCode.authorizeURL({
-  redirect_uri: 'http://localhost:8000/callback',
-  scope: '/authenticate',
+  site: config.AUTH_SITE,
+  redirect_uri: config.REDIRECT_URI,
+  scope: '/authenticate /activities/update',
   state: 'nope'
 });
 
@@ -32,9 +24,7 @@ app.use(express.static(__dirname + '/public'));
   
 // Index page 
 app.get('/', function(req, res) {
-  res.render('pages/index', {
-    'authorization_uri': authorization_uri
-  });
+  res.render('pages/index', {'authorization_uri': authorization_uri});
 });
 
 // Get the access token object (the authorization code is given from the previous step).
@@ -43,30 +33,28 @@ app.get('/callback', function(req, res) {
   var code = req.query.code;
   oauth2.authCode.getToken({
     code: code,
-    redirect_uri: 'http://localhost:8000/callback'
+    redirect_uri: config.REDIRECT_URI
   }, function(error, result){
-    if (error) {
+    if (error)
       // check for access_denied param
       if (req.query.error == 'access_denied')
         // User denied access
         res.render('pages/access_denied', {
-          'error': JSON.stringify(error, null, 4)
+          'error': JSON.stringify(error, null, 2)
         });      
       else
         // General Error page
         res.render('pages/error', {
-          'error': JSON.stringify(error, null, 4)
+          'error': JSON.stringify(error, null, 2)
         });
-    } else {
+      else 
       // Token Page
-      token = oauth2.accessToken.create(result);
       res.render('pages/token', {
-        'token': JSON.stringify(token, null, 4)
+        'token': JSON.stringify(oauth2.accessToken.create(result), null, 2)
       })
-    }
   });
 });
 
-app.listen(config.port, function () {
-  console.log('server started on ' + config.port);
+app.listen(config.PORT, function () {
+  console.log('server started on ' + config.PORT);
 });
