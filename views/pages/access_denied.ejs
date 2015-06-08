@@ -1,4 +1,5 @@
-User denied access:<br />
-<pre><%= error %></pre><br />
-<br />
-<a href="/">Try again</a>
+<%include header.ejs%>
+	<h2>User denied access:</h2>
+	<pre><%= error %></pre>
+	<a class="btn btn-default" href="/">Try again</a>
+<%include footer.ejs%>
