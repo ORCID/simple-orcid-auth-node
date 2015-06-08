@@ -1,6 +1,13 @@
 var express = require('express'), 
   config = require('./config.js');
 
+var app = express(); // Init express
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+app.listen(config.PORT, config.SERVER_IP, function () { // Start express
+  console.log('server started on ' + config.PORT);
+});
+
 var oauth2 = require('simple-oauth2')({ // Initialize the OAuth2 Library
   clientID: config.CLIENT_ID,
   clientSecret: config.CLIENT_SECRET,
@@ -15,18 +22,13 @@ var authorization_uri = oauth2.authCode.authorizeURL({ // Build Auth URI
   state: '1'
 });
 
-var app = express(); // Express is our server
-app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
-
 app.get('/', function(req, res) { // Index page 
   res.render('pages/index', {'authorization_uri': authorization_uri});
 });
 
-app.get('/callback', function(req, res) { // redeem code
+app.get('/callback', function(req, res) { // Redeem code URL
   oauth2.authCode.getToken({
     code: req.query.code,
-    redirect_uri: config.REDIRECT_URI
   }, function(error, result) {
     if (error == null) // No errors means we have a token :-)
       res.render('pages/token', {
@@ -42,8 +44,4 @@ app.get('/callback', function(req, res) { // redeem code
           'error': JSON.stringify(error, null, 2)
         });
   });
-});
-
-app.listen(config.PORT, config.SERVER_IP, function () { // Start express
-  console.log('server started on ' + config.PORT);
 });
