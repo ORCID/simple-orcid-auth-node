@@ -8,7 +8,7 @@ module.exports = config = {
   REDIRECT_URI: 'http://localhost:8000/callback'
 }
 
-// for any config keys if they exist as environment variables overwrite
+// for any config keys if they exist as environment variables overwrite config
 for (key in config)
 	if (process.env[key] != undefined)
 		config[key] = process.env[key];
