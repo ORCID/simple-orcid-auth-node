@@ -6,6 +6,7 @@
   "dependencies": {
     "ejs": "^1.0.0",
     "simple-oauth2": "https://github.com/ORCID/simple-oauth2/archive/MASTER_2015_06_03.tar.gz",
+    "global-request-logger": "^0.0.1",
     "express": "^4.12.4"
   },
   "repository": {
