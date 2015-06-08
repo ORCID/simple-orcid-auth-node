@@ -51,4 +51,4 @@ You should now have a local example running.
 
 ### Finally you can also see this code running live in a production:
 
-[https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/](https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/callback?code=4EkDzQ&state=1)
+[https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/](https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/)
