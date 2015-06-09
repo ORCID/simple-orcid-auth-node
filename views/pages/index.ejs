@@ -6,7 +6,7 @@
     <h4>Two Legged OAuth2 Flow</h4>
     <strong> Leggs  - Client, Server</strong>. Used for getting tokens to access API resources not owned by reseachers.
     In this example we will request a /read-public token which allows access to read and search public ORCID records with 
-    the ORCID Member API.
+    the ORCID Member API. Read more <a href="http://members.orcid.org/api/post-oauthtoken-reading-public-data" target="twoStepReadMore">here</a>.
     <p></p>
     <p class="home"><a class="btn btn-default btn-lg" href="/twoStep">Request a /read-public token</a></p>
     <p></p>
@@ -19,7 +19,9 @@
        <li><strong>User interacts with client application</strong>. User is redirected to client application with authorization code.</li>
        <li><strong>Client application interacts with authorization server</strong>. Client reads authorization code from URL. Uses authorization code and client secret to exchange authorization code for token allowing access.</li>
     </ol>
-    
-	  <p class="home"><a class="btn btn-default btn-lg" href="<%= authorization_uri %>">As a user, visit authorization link</a></p>
+    <p>
+    Learn more <a href="http://members.orcid.org/api/tokens-through-3-legged-oauth-authorization" target="3leggedFlow">here</a>. 
+	  </p>
+    <p class="home"><a class="btn btn-default btn-lg" href="<%= authorization_uri %>">As a user, visit authorization link</a></p>
     <p class="note"><strong>NOTE:</strong> it's ok to create fake/test accounts on sandbox.</p>
 <%include ../components/footer.ejs%>
