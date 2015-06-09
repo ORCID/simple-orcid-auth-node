@@ -2,5 +2,15 @@
     <strong>Steps 1 through 3 completed! Yey we have a token!</strong>
 	<h2>Token:</h2>
 	<pre><%= token %></pre>
+	<br />
+	<strong>The token JSON provides the following:</strong>
+	<ol>
+       <li><strong>Authenticated ORCID iD</strong> which we can read from token > orcid.</li>
+       <li><strong>Access token</strong>, which is read from token > access_token.</li>
+       <li><strong>Scopes</strong>,  which is read from token > scope. This tells us what actions 
+       the token can be used for.</li>
+    </ol>
+    <br />
 	<a class="btn btn-default" href="/">Try again</a>
+	<br />    
 <%include ../components/footer.ejs%>
