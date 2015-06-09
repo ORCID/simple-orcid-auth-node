@@ -2,6 +2,15 @@
 	margin-top: 15px;
 }
 
+.container p{
+	font-size: 14px;
+}
+
+.container p.note{
+	font-size: 18px;
+	text-align: center;
+}
+
 .container h1{
 	text-align: center;
 	color: #a6ce39;
