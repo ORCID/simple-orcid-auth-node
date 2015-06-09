@@ -1,5 +1,6 @@
+## Quickstart
 
-### Install NodeJS or Upgrade 
+### 1. Install NodeJS or Upgrade 
 
 [Install it!](https://nodejs.org/)
 or 
@@ -7,17 +8,13 @@ or
 
 
 
-### Download Project
+### 2. Download Project
 
 [zip file](https://github.com/rcpeters/simple-orcid-auth-node/archive/master.zip) and
  unzip.
- 
- or git clone
+   
 
-           git clone git@github.com:rcpeters/simple-orcid-auth-node.git
-          
-
-### Open a command prompt
+### 3. Open a command prompt
 
 * **Windows**
  
@@ -28,28 +25,31 @@ or
     Open terminal by clicking `Search Spotlight` typing in `Terminal` and selecting Terminal.
 
 
-### Cd into the directory you cloned or unzipped
+### 4. Cd into the directory you cloned or unzipped
 
 Depending on how you downloaded and unzipped the project.
 
-         cd Downdloads/simple-orcid-auth-node
+* **Windows**
 
- or
+        cd Downloads/simple-orcid-auth-node-master/simple-orcid-auth-node-master
 
-         cd simple-orcid-auth-node
+* **OSX**
+ 
+
+        cd Downloads/simple-orcid-auth-node-master
 
 
-### Install dependencies
+### 5. Install client app node dependencies
 
        npm install 
 
-### Start client application.
+### 6. Start client application.
 
        node client-app.js
 
-### Open localhost [http://localhost:8000/](http://localhost:8000/)
-You should now have a local example running.
+### 7. Open localhost [http://localhost:8000/](http://localhost:8000/)
+You should have the a sample client application running on your local machine!
 
-### Finally you can also see this code running live in a production:
+## Finally you can also see this code running live in a production:
 
 [https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/](https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/)
