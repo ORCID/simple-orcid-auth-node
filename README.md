@@ -18,7 +18,7 @@ or
 
 * **Windows**
  
-    Select `Search programs and files` type in `cmd` and select cmd.
+    Select `Search programs and files` type in `node.js command prompt` and select `Node.js command prompt`.
     
 * **OSX**
  
