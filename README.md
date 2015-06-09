@@ -43,9 +43,9 @@ Depending on how you downloaded and unzipped the project.
 
        npm install 
 
-### Start server
+### Start client application.
 
-       node server.js
+       node client-app.js
 
 ### Open localhost [http://localhost:8000/](http://localhost:8000/)
 You should now have a local example running.

@@ -26,5 +26,5 @@
     "url": "https://github.com/rcpeters/simple-orcid-auth-node/issues"
   },
   "homepage": "https://github.com/rcpeters/simple-orcid-auth-node/issues",
-  "main": "server.js"
+  "main": "client-app.js"
 }

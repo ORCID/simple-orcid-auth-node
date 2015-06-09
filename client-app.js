@@ -1,6 +1,6 @@
 var express = require('express'), 
-  config = require('./config'),
-  httpLogging = require('./http-logging');
+  config = require('./helpers/config'),
+  httpLogging = require('./helpers/http-logging');
   
 var app = express(); // Init express
 app.set('view engine', 'ejs');
