@@ -20,7 +20,6 @@ var authorization_uri = oauth2.authCode.authorizeURL({ // Build Auth URI
   site: config.AUTH_SITE,
   redirect_uri: config.REDIRECT_URI,
   scope: '/authenticate /activities/update',
-  state: '1',
 });
 
 app.get('/', function(req, res) { // Index page 

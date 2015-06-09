@@ -1,13 +1,25 @@
 <%include ../components/header.ejs%>
     <p>
-        This sample sandbox client application demonstrates interacting a simple client application interacting with ORCID OAuth2 service via <a href="http://members.orcid.org/api/tokens-through-3-legged-oauth-authorization" target="3_legged">3 legged OAuth2</a>. For a comprehensive overview visit <a href="http://members.orcid.org/api" target="member_api">http://members.orcid.org/api</a>.
+        This sample sandbox client application demonstrates interacting a simple client application interacting with <a href="http://members.orcid.org/api/oauth">ORCID OAuth2</a> service. For a comprehensive overview visit <a href="http://members.orcid.org/api" target="member_api">http://members.orcid.org/api</a>.
     </p>
-    <ol>
-       <li><strong>Leg 1 (user interacts with authorization server)</strong>. User is redirected to authorization server with link parameters identifying requesting client application. User approves or denies permission for client access.</li>
-       <li><strong>Leg 2 (user interacts client application)</strong>. User is redirected to client application with authorization code.</li>
-       <li><strong>Leg 3 (client application interacts with authorization server)</strong>. Client reads authorization code from URL. Uses authorization code and client secret to exchange authorization code for token allowing access.
-    </ol>
+
+    <h4>Two Legged OAuth2 Flow</h4>
+    <strong> Leggs  - Client, Server</strong>. Used for getting tokens to access API resources not owned by reseachers.
+    In this example we will request a /read-public token which allows access to read and search public ORCID records with 
+    the ORCID Member API.
+    <p></p>
+    <p class="home"><a class="btn btn-default btn-lg" href="/twoStep">Request a /read-public token</a></p>
+    <p></p>
     <hr>
-	<p class="home"><a class="btn btn-default btn-lg" href="<%= authorization_uri %>">As a user, visit authorization link</a></p>
+    <h4>Three Legged OAuth2 Flow</h4>
+    <strong> Leggs - User, Client, Server</strong>. Used for getting tokens to access API resources owned by researchers.
+    In this example we will request access to authenticate a users ORCID iD and permission to update their ORCID Activities. 
+    <ol>
+       <li><strong>User interacts with authorization server</strong>. User is redirected to authorization server with link parameters identifying requesting client application. User approves or denies permission for client access.</li>
+       <li><strong>User interacts with client application</strong>. User is redirected to client application with authorization code.</li>
+       <li><strong>Client application interacts with authorization server</strong>. Client reads authorization code from URL. Uses authorization code and client secret to exchange authorization code for token allowing access.</li>
+    </ol>
+    
+	  <p class="home"><a class="btn btn-default btn-lg" href="<%= authorization_uri %>">As a user, visit authorization link</a></p>
     <p class="note"><strong>NOTE:</strong> it's ok to create fake/test accounts on sandbox.</p>
 <%include ../components/footer.ejs%>
