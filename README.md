@@ -50,6 +50,6 @@ Depending on how you downloaded and unzipped the project.
 ### 7. Open localhost [http://localhost:8000/](http://localhost:8000/)
 You should have the a sample client application running on your local machine!
 
-## Finally you can also see this code running live in a production:
+## Finally you can also see this code running live on a "production like" machine:
 
 [https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/](https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/)
