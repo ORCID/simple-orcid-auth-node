@@ -1,9 +1,9 @@
 <%include header.ejs%>
-This sample client application demonstrates interacting a simple client application interacting with ORCID OAuth2 service via <a href="http://members.orcid.org/api/tokens-through-3-legged-oauth-authorization" target="3_legged">3 legged OAuth2</a>. For a comprehensive overview visit <a href="http://members.orcid.org/api" target="member_api">http://members.orcid.org/api</a>.
+This sample sandbox client application demonstrates interacting a simple client application interacting with ORCID OAuth2 service via <a href="http://members.orcid.org/api/tokens-through-3-legged-oauth-authorization" target="3_legged">3 legged OAuth2</a>. For a comprehensive overview visit <a href="http://members.orcid.org/api" target="member_api">http://members.orcid.org/api</a>.
 <ol>
    <li><strong>Leg 1 (user interacts with authorization server)</strong>. User is redirected to authorization server with link parameters identifying requesting client application. User approves or denies permission for client access.</li>
    <li><strong>Leg 2 (user interacts client application)</strong>. User is redirected to client application with authorization code.</li>
    <li><strong>Leg 3 (client application interacts with authorization server)</strong>. Client reads authorization code from URL. Uses authorization code and client secret to exchange authorization code for token allowing access.
 </ol>
-	<p class="home"><a class="btn btn-default btn-lg" href="<%= authorization_uri %>">User visits authorization link</a></p>
+	<p class="home"><a class="btn btn-default btn-lg" href="<%= authorization_uri %>">As an user visits authorization link</a></p>
 <%include footer.ejs%>

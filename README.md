@@ -30,13 +30,14 @@ or
 
 ### Cd into the directory you cloned or unzipped
 
+Depending on how you downloaded and unzipped the project.
+
          cd Downdloads/simple-orcid-auth-node
 
  or
 
          cd simple-orcid-auth-node
 
-depending on how you downloaded and unzipped the project.
 
 ### Install dependencies
 

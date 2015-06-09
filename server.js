@@ -1,17 +1,7 @@
 var express = require('express'), 
-  config = require('./config.js'),
-  globalLog = require('global-request-logger');
-
-globalLog.initialize(); // Setup http logging
-globalLog.on('success', function(request, response) {
-  console.log('Request', request);
-  console.log('Response', response);
-});
-globalLog.on('error', function(request, response) {
-  console.log('Request', request);
-  console.log('Response', response);
-});
-
+  config = require('./config'),
+  httpLogging = require('./http-logging');
+  
 var app = express(); // Init express
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -23,14 +13,14 @@ var oauth2 = require('simple-oauth2')({ // Initialize the OAuth2 Library
   clientID: config.CLIENT_ID,
   clientSecret: config.CLIENT_SECRET,
   site: config.AUTH_SITE,
-  tokenPath: config.TOKEN_PATH
+  tokenPath: config.TOKEN_PATH,
 });
 
 var authorization_uri = oauth2.authCode.authorizeURL({ // Build Auth URI
   site: config.AUTH_SITE,
   redirect_uri: config.REDIRECT_URI,
   scope: '/authenticate /activities/update',
-  state: '1'
+  state: '1',
 });
 
 app.get('/', function(req, res) { // Index page 
@@ -41,7 +31,7 @@ app.get('/callback', function(req, res) { // Redeem code URL
   oauth2.authCode.getToken({
     code: req.query.code,
   }, function(error, result) {
-    if (error == null) // No errors means we have a token :-)
+    if (error == null) // No errors! we have a token :-)
       res.render('pages/token', {
         'token': JSON.stringify(oauth2.accessToken.create(result), null, 2)
       })
