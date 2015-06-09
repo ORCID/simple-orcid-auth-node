@@ -1,7 +1,7 @@
 <%include ../components/header.ejs%>
-    <strong>Steps 1 through 3 completed! Yey we have a token!</strong>
+    <strong>Yey we have a token!</strong>
 	<h2>Token:</h2>
-	<pre><%= token %></pre>
+	<pre><%= JSON.stringify(token, null, 2) %></pre>
 	<br />
 	<strong>The token JSON provides the following:</strong>
 	<ol>

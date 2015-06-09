@@ -32,17 +32,20 @@ app.get('/callback', function(req, res) { // Redeem code URL
     code: req.query.code,
   }, function(error, result) {
     if (error == null) // No errors! we have a token :-)
-      res.render('pages/token', {
-        'token': JSON.stringify(oauth2.accessToken.create(result), null, 2)
-      })
-    else // Show token Page
+      res.render('pages/token', { 'token': oauth2.accessToken.create(result) });
+    else // Handle error
       if (req.query.error == 'access_denied') // User denied access
-        res.render('pages/access_denied', {
-          'error': JSON.stringify(error, null, 2)
-        });      
+        res.render('pages/access_denied', { 'error': error });      
       else // General Error page
-        res.render('pages/error', {
-          'error': JSON.stringify(error, null, 2)
-        });
+        res.render('pages/error', { 'error': error });
+  });
+});
+
+app.get('/twoStep', function(req, res) {
+  oauth2.client.getToken({scope: '/read-public'}, function(error, result) {
+    if (error == null) // No errors! we have a token :-)
+      res.render('pages/token', { 'token': oauth2.accessToken.create(result) });
+    else // handle error
+      res.render('pages/error', { 'error': error });
   });
 });
