@@ -10,7 +10,7 @@ or
 
 ### 2. Download Project
 
-[zip file](https://github.com/rcpeters/simple-orcid-auth-node/archive/master.zip) and
+Download [zip file](https://github.com/rcpeters/simple-orcid-auth-node/archive/master.zip) and
  unzip.
    
 
