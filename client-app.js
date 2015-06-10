@@ -31,7 +31,11 @@ app.get('/callback', function(req, res) { // Redeem code URL
     code: req.query.code,
   }, function(error, result) {
     if (error == null) // No errors! we have a token :-)
-      res.render('pages/token', { 'token': oauth2.accessToken.create(result) });
+      res.render('pages/token', { 
+        'token': oauth2.accessToken.create(result), 
+        'config': config,
+        'authorization_uri': authorization_uri,     
+      });
     else // Handle error
       if (req.query.error == 'access_denied') // User denied access
         res.render('pages/access_denied', { 'error': error });      
