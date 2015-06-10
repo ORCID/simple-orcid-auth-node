@@ -43,13 +43,28 @@ Depending on how you downloaded and unzipped the project.
 
        npm install 
 
-### 6. Start client application.
+### 6. (OPTIONAL) Configure credentials. 
+
+This example is configured with default test credentials. You can optionally request your own 
+sandbox credentials: 
+[http://orcid.org/content/register-client-application](http://orcid.org/content/register-client-application). 
+The following configuration keys can be overwritten by setting 
+[environment variables](http://en.wikipedia.org/wiki/Environment_variable):
+
+* CLIENT_ID - Client id issued by ORCID.
+* CLIENT_SECRET - Client secret issued by ORCID
+* AUTH_SITE - https://sandbox.orcid.org or https://orcid.org
+* TOKEN_PATH - https://api.sandbox.orcid.org/oauth/token, https://pub.sandbox.orcid.org/oauth/token,
+* REDIRECT_URI - Link use is sent back to with OAuth2 authorization code.
+
+
+### 7. Start client application.
 
        node client-app.js
 
-### 7. Open localhost [http://localhost:8000/](http://localhost:8000/)
+### 8. Open localhost [http://localhost:8000/](http://localhost:8000/)
 You should have the a sample client application running on your local machine!
 
-## Finally you can also see this code running live on a "production like" machine:
+## Finally you can also see this code running on a live machine:
 
 [https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/](https://simpleorcidauthnode-rcpetersorcid.rhcloud.com/)
