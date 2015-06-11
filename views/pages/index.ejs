@@ -1,12 +1,12 @@
 <%include ../components/header.ejs%>
     <p>
-        This sample sandbox client application demonstrates a simple client application interacting with <a href="http://members.orcid.org/api/oauth">ORCID OAuth2</a> service to retrieve a <a href="http://tools.ietf.org/html/rfc6750#section-1.2" targer="bearer_def">bearer token</a>. For a comprehensive overview visit <a href="http://members.orcid.org/api" target="member_api">http://members.orcid.org/api</a>.
+        This sample sandbox client application demonstrates a simple client application interacting with <a href="http://members.orcid.org/api/oauth2">ORCID OAuth2</a> service to retrieve a <a href="http://tools.ietf.org/html/rfc6750#section-1.2" targer="bearer_def">bearer token</a>. For a comprehensive overview visit <a href="http://members.orcid.org/api" target="member_api">http://members.orcid.org/api</a>.
     </p>
 
     <hr />
 
     <h4>1. <a href="http://tools.ietf.org/html/rfc6749#section-1.3.1" target="Authorization Code">Authorization Code</a></h4>
-    <strong>Commonly known as three legged flow. Involves user, client, server</strong>. Used for getting bearer tokens to access API resources that the user (researchers) control access.
+    <strong>Commonly known as three legged flow. Involves user, client, server</strong>. Used for getting bearer tokens to access API resources to which the user (researcher) controls access.
     In this example we will request access to authenticate a users ORCID iD and permission to update their ORCID Activities. 
     <ol>
        <li><strong>User interacts with authorization server</strong>. User is redirected to authorization server with link parameters identifying requesting client application. User approves or denies permission for client access.</li>
