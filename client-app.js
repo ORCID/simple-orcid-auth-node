@@ -1,5 +1,7 @@
 var express = require('express'), 
   config = require('./helpers/config'),
+  request = require('request'),
+  querystring = require("querystring"),
   httpLogging = require('./helpers/http-logging');
   
 var app = express(); // Init express
@@ -45,10 +47,30 @@ app.get('/callback', function(req, res) { // Redeem code URL
 });
 
 app.get('/twoStep', function(req, res) {
-  oauth2.client.getToken({scope: '/read-public'}, function(error, result) {
+
+  // function to call after making request
+  var credentialsCallback = function(error, response, body) {
     if (error == null) // No errors! we have a token :-)
-      res.render('pages/token', { 'token': oauth2.accessToken.create(result) });
+      res.render('pages/token', { 'body': JSON.parse(body) });
     else // handle error
       res.render('pages/error', { 'error': error });
-  });
+  };
+
+  // request configuration 
+  var credentialsReq = {
+    url: 'https://api.sandbox.orcid.org/oauth/token',
+    method: 'post',
+    body: querystring.stringify({
+      'scope': '/read-public',
+      'grant_type': 'client_credentials',
+      'client_id': config.CLIENT_ID,
+      'client_secret': config.CLIENT_SECRET
+    }),
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
+    }
+  }
+
+  //making request for client credentials
+  request(credentialsReq, credentialsCallback);
 });

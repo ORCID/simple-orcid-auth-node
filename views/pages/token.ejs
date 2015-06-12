@@ -1,7 +1,7 @@
 <%include ../components/header.ejs%>
     
     <h2>Yey we have a token!</h2>
-    <% if (token.token.orcid) { %>
+    <% if (body.orcid) { %>
        The user was sent to the authorization URL. After the user authorizes the
        requested scopes for the client applications the user is redirected back
        to the client application with an authorize code in the URL parameters.
@@ -12,11 +12,11 @@
        and client secret.
     <% } %>
 	<h2>Token:</h2>
-	<pre><%= JSON.stringify(token.token, null, 2) %></pre>
+	<pre><%= JSON.stringify(body, null, 2) %></pre>
 	<br />
 	<strong>This token JSON provides the following:</strong>
 	<ol>
-	   <% if (token.token.orcid) { %>
+	   <% if (body.orcid) { %>
           <li><strong>Authenticated ORCID iD</strong> which we can read from token > orcid.</li>
        <% } %>
        <li><strong>Access token</strong></li>
