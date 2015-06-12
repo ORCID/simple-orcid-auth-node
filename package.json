@@ -5,14 +5,13 @@
   "main": "gulpfile.js",
   "dependencies": {
     "ejs": "^1.0.0",
-    "simple-oauth2": "https://github.com/ORCID/simple-oauth2/archive/MASTER_2015_06_03.tar.gz",
     "global-request-logger": "^0.0.1",
     "express": "^4.12.4",
     "request": "^2.57.0"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:rcpeters/simple-orcid-auth-node.git"
+    "url": "git@github.com:ORCID/simple-orcid-auth-node.git"
   },
   "engines": {
     "node": ">= 0.10.0",
@@ -24,8 +23,8 @@
   "author": "rcpeters",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rcpeters/simple-orcid-auth-node/issues"
+    "url": "https://github.com/ORCID/simple-orcid-auth-node/issues"
   },
-  "homepage": "https://github.com/rcpeters/simple-orcid-auth-node/issues",
+  "homepage": "https://github.com/ORCID/simple-orcid-auth-node/issues",
   "main": "client-app.js"
 }

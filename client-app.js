@@ -1,8 +1,8 @@
 var express = require('express'), 
   config = require('./helpers/config'),
-  request = require('request'),
+  httpLogging = require('./helpers/http-logging'),
   querystring = require("querystring"),
-  httpLogging = require('./helpers/http-logging');
+  request = require('request');
   
 var app = express(); // Init express
 app.set('view engine', 'ejs');
@@ -11,44 +11,56 @@ app.listen(config.PORT, config.SERVER_IP, function () { // Start express
   console.log('server started on ' + config.PORT);
 });
 
-var oauth2 = require('simple-oauth2')({ // Initialize the OAuth2 Library
-  clientID: config.CLIENT_ID,
-  clientSecret: config.CLIENT_SECRET,
-  site: config.AUTH_SITE,
-  tokenPath: config.TOKEN_PATH,
-});
-
-var authorization_uri = oauth2.authCode.authorizeURL({ // Build Auth URI
-  site: config.AUTH_SITE,
-  redirect_uri: config.REDIRECT_URI,
-  scope: '/authenticate /activities/update',
-});
-
 app.get('/', function(req, res) { // Index page 
-  res.render('pages/index', {'authorization_uri': authorization_uri});
-});
-
-app.get('/callback', function(req, res) { // Redeem code URL
-  oauth2.authCode.getToken({
-    code: req.query.code,
-  }, function(error, result) {
-    if (error == null) // No errors! we have a token :-)
-      res.render('pages/token', { 
-        'token': oauth2.accessToken.create(result), 
-        'config': config,
-        'authorization_uri': authorization_uri,     
-      });
-    else // Handle error
-      if (req.query.error == 'access_denied') // User denied access
-        res.render('pages/access_denied', { 'error': error });      
-      else // General Error page
-        res.render('pages/error', { 'error': error });
+  // link we send user to authorize our requested scopes
+  var auth_link = config.AUTHORIZE_URI + '?'
+   + querystring.stringify({
+    'redirect_uri': config.CODE_CALLBACK_URI,
+    'scope': '/authenticate /activities/update',
+    'response_type':'code',
+    'client_id': config.CLIENT_ID
   });
+  res.render('pages/index', {'authorization_uri': auth_link});
 });
 
-app.get('/twoStep', function(req, res) {
+app.get('/authorization-code-callback', function(req, res) { // Redeem code URL
+  if (req.query.error == 'access_denied') {
+    // User denied access
+    res.render('pages/access_denied', { 'error': 'User denied access' });      
+  } else {
+    // exchange code
 
-  // function to call after making request
+    // function to render page after making request
+    var exchangingCallback = function(error, response, body) {
+    if (error == null) // No errors! we have a token :-)
+      res.render('pages/token', { 'body': JSON.parse(body) });
+    else // handle error
+      res.render('pages/error', { 'error': error });
+    };
+
+    // config for exchanging code for token 
+    var exchangingReq = {
+      url: config.TOKEN_EXCHANGE_URI,
+      method: 'post',
+      body: querystring.stringify({
+        'code': req.query.code,
+        'client_id': config.CLIENT_ID,
+        'client_secret': config.CLIENT_SECRET,
+        'grant_type': 'authorization_code',
+      }),
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
+      }
+    }
+    
+    //making request exchanging code for token
+    request(exchangingReq, exchangingCallback);
+  }
+});
+
+app.get('/client-credentials', function(req, res) {
+
+  // function to render page after making request
   var credentialsCallback = function(error, response, body) {
     if (error == null) // No errors! we have a token :-)
       res.render('pages/token', { 'body': JSON.parse(body) });
@@ -58,13 +70,13 @@ app.get('/twoStep', function(req, res) {
 
   // request configuration 
   var credentialsReq = {
-    url: 'https://api.sandbox.orcid.org/oauth/token',
+    url: config.TOKEN_EXCHANGE_URI,
     method: 'post',
     body: querystring.stringify({
-      'scope': '/read-public',
-      'grant_type': 'client_credentials',
       'client_id': config.CLIENT_ID,
-      'client_secret': config.CLIENT_SECRET
+      'client_secret': config.CLIENT_SECRET,
+      'grant_type': 'client_credentials',
+      'scope': '/read-public',
     }),
     headers: {
       'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
